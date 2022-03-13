@@ -1,13 +1,21 @@
 package com.aks.commons.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
-@RestController
-public class BaseController {
+public interface BaseController<
+        Request extends BaseRequest,
+        Response extends BaseResponse,
+        ID> {
 
-    @GetMapping("/test")
-    public String test() {
-        return "Hello world!";
-    }
+    Optional<Response> update(@Valid Request requestModel);
+
+    Optional<Response> insert(@Valid Request requestModel);
+
+    Optional<Response> getById(@Valid ID id);
+
+    List<Response> getAll();
+
+    void deleteById(ID id);
 }
