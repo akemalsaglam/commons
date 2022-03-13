@@ -68,9 +68,15 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
+						<index>true</index>
 						<manifest>
 							<addClasspath>true</addClasspath>
 						</manifest>
+						<manifestEntries>
+							<mode>development</mode>
+							<url>${pom.url}</url>
+							<key>value</key>
+						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
