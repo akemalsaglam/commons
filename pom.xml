@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.github.akemalsaglam</groupId>
 		<artifactId>base-project</artifactId>
-		<version>4e55f3687d</version>
+		<version>9be072cdf9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
