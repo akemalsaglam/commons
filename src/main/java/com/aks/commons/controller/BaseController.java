@@ -17,5 +17,7 @@ public interface BaseController<
 
     List<Response> getAll();
 
-    void deleteById(ID id);
+    void deleteById(@Valid ID id);
+
+    void softDeleteById(@Valid ID id);
 }

@@ -1,28 +1,24 @@
-package com.aks.commons.controller;
+package com.aks.commons.graphql;
 
+import com.aks.commons.controller.BaseController;
+import com.aks.commons.controller.BaseRequest;
+import com.aks.commons.controller.BaseResponse;
 import com.aks.commons.jpa.BaseEntity;
 import com.aks.commons.jpa.Status;
 import com.aks.commons.mapper.BaseMapper;
 import com.aks.commons.service.BaseService;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-public class AbstractController<Entity extends BaseEntity, Request extends BaseRequest, Response extends BaseResponse, ID>
+public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request extends BaseRequest, Response extends BaseResponse, ID>
         implements BaseController<Request, Response, ID> {
 
     private final BaseService<Entity, ID> service;
     private final BaseMapper<Entity, Request, Response> mapper;
 
-    public AbstractController(BaseService<Entity, ID> service,
-                              BaseMapper<Entity, Request, Response> mapper) {
+    public BaseGraphQLMutationResolver(BaseService<Entity, ID> service,
+                                       BaseMapper<Entity, Request, Response> mapper) {
         this.service = service;
         this.mapper = mapper;
     }
@@ -64,19 +60,6 @@ public class AbstractController<Entity extends BaseEntity, Request extends BaseR
             entity.get().setStatus(Status.PASSIVE);
             service.save(entity.get());
         }
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
     }
 }
 
