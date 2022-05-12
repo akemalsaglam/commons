@@ -44,8 +44,8 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     }
 
     @Override
-    public void softDeleteById(Request request) {
-        final Optional<Entity> entity = service.findById((ID) request.getId());
+    public void softDeleteById(ID id) {
+        final Optional<Entity> entity = service.findById(id);
         if (entity.isPresent()) {
             entity.get().setStatus(Status.PASSIVE.toString());
             AuditingUtil.setDeleteAuditInfo(entity.get());

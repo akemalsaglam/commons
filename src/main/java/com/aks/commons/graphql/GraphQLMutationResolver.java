@@ -17,7 +17,7 @@ public interface GraphQLMutationResolver<
 
     void deleteById(@Valid ID id);
 
-    void softDeleteById(@Valid Request requestModel);
+    void softDeleteById(@Valid ID id);
 }
 
 
