@@ -8,6 +8,7 @@ import com.aks.commons.jpa.auditing.AuditingUtil;
 import com.aks.commons.mapper.BaseMapper;
 import com.aks.commons.service.BaseService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request extends BaseRequest, Response extends BaseResponse, ID>
@@ -23,35 +24,47 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     }
 
     @Override
-    public Optional<Response> update(Request request) {
-        Entity entity = mapper.mapRequestToEntity(request);
-        AuditingUtil.setUpdateAuditInfo(entity);
-        final Entity updatedEntity = service.save(entity);
-        return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
-    }
-
-    @Override
     public Optional<Response> insert(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
         AuditingUtil.setCreateAuditInfo(entity);
+        entity.setStatus(Status.ACTIVE.value);
         final Entity insertedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(insertedEntity));
     }
 
     @Override
-    public void deleteById(ID id) {
-        service.deleteById(id);
+    public Optional<Response> update(Request request) {
+        final Optional<Entity> optionalEntity = service.findById((ID) request.getId());
+        if (optionalEntity.isEmpty()) {
+            throw new EntityNotFoundException("Item not found by given id.");
+        }
+        Entity entity = mapper.mapRequestToEntity(request);
+        AuditingUtil.setUpdateAuditInfo(entity);
+        AuditingUtil.preserveCreateAuditInfo(optionalEntity.get(), entity);
+        final Entity updatedEntity = service.save(entity);
+        return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
     }
 
     @Override
     public void softDeleteById(ID id) {
         final Optional<Entity> entity = service.findById(id);
-        if (entity.isPresent()) {
-            entity.get().setStatus(Status.PASSIVE.toString());
-            AuditingUtil.setDeleteAuditInfo(entity.get());
-            service.save(entity.get());
+        if (entity.isEmpty()) {
+            throw new EntityNotFoundException("Item not found by given id.");
         }
+        entity.get().setStatus(Status.PASSIVE.value);
+        AuditingUtil.setDeleteAuditInfo(entity.get());
+        service.save(entity.get());
     }
+
+    @Override
+    public void deleteById(ID id) {
+        final Optional<Entity> entity = service.findById(id);
+        if (entity.isEmpty()) {
+            throw new EntityNotFoundException("Item not found by given id.");
+        }
+        service.deleteById(id);
+    }
+
 }
 
 

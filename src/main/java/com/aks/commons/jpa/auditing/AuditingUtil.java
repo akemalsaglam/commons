@@ -25,4 +25,14 @@ public class AuditingUtil {
         baseEntity.setDeletedByEmail(SecurityContextUtil.getUserEmailFromContext());
         baseEntity.setDeletedTime(ZonedDateTime.now());
     }
+
+    public static void preserveCreateAuditInfo(BaseEntity sourceEntity, BaseEntity targetEntity) {
+        targetEntity.setCreatedTime(sourceEntity.getCreatedTime());
+        targetEntity.setCreatedByEmail(sourceEntity.getCreatedByEmail());
+    }
+
+    public static void preserveUpdateAuditInfo(BaseEntity sourceEntity, BaseEntity targetEntity) {
+        targetEntity.setUpdatedTime(sourceEntity.getUpdatedTime());
+        targetEntity.setUpdatedByEmail(sourceEntity.getUpdatedByEmail());
+    }
 }
