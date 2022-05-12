@@ -8,5 +8,5 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity {
 
-    private Status status;
+    private String status;
 }

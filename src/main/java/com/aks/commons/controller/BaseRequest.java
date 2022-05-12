@@ -9,4 +9,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class BaseRequest implements Serializable {
 
+    private Object id;
+
 }

@@ -61,7 +61,7 @@ public class AbstractController<Entity extends BaseEntity, Request extends BaseR
     public void softDeleteById(ID id) {
         final Optional<Entity> entity = service.findById(id);
         if (entity.isPresent()) {
-            entity.get().setStatus(Status.PASSIVE);
+            entity.get().setStatus(Status.PASSIVE.toString());
             service.save(entity.get());
         }
     }
