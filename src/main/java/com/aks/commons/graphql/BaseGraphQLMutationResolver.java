@@ -33,7 +33,7 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     @Override
     public Optional<Response> insert(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
-        AuditingUtil.setUpdateAuditInfo(entity);
+        AuditingUtil.setCreateAuditInfo(entity);
         final Entity insertedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(insertedEntity));
     }
