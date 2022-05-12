@@ -4,6 +4,7 @@ import com.aks.commons.controller.BaseRequest;
 import com.aks.commons.controller.BaseResponse;
 import com.aks.commons.jpa.BaseEntity;
 import com.aks.commons.jpa.Status;
+import com.aks.commons.jpa.auditing.AuditingUtil;
 import com.aks.commons.mapper.BaseMapper;
 import com.aks.commons.service.BaseService;
 
@@ -24,14 +25,16 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     @Override
     public Optional<Response> update(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
+        AuditingUtil.setUpdateAuditInfo(entity);
         final Entity updatedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
     }
 
     @Override
     public Optional<Response> insert(Request request) {
-        Entity eventEntity = mapper.mapRequestToEntity(request);
-        final Entity insertedEntity = service.save(eventEntity);
+        Entity entity = mapper.mapRequestToEntity(request);
+        AuditingUtil.setUpdateAuditInfo(entity);
+        final Entity insertedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(insertedEntity));
     }
 
@@ -42,9 +45,10 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
 
     @Override
     public void softDeleteById(Request request) {
-        final Optional<Entity> entity = service.findById((ID)request.getId());
+        final Optional<Entity> entity = service.findById((ID) request.getId());
         if (entity.isPresent()) {
             entity.get().setStatus(Status.PASSIVE.toString());
+            AuditingUtil.setDeleteAuditInfo(entity.get());
             service.save(entity.get());
         }
     }
