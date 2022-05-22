@@ -32,6 +32,16 @@ public class BaseGraphQLQueryResolver<Entity extends BaseEntity, Request extends
         return mapper.mapEntityListToResponseList(service.findAll());
     }
 
+    @Override
+    public List<Response> getAllActive() {
+        return mapper.mapEntityListToResponseList(service.findAll());
+    }
+
+    @Override
+    public Optional<Response> getActiveById(ID id) {
+        final Optional<Entity> eventEntity = service.findActiveById(id);
+        return eventEntity.map(mapper::mapEntityToResponse);
+    }
 }
 
 

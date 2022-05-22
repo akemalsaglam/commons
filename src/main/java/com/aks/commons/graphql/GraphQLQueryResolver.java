@@ -10,7 +10,11 @@ public interface GraphQLQueryResolver<Response extends BaseResponse, ID> {
 
     Optional<Response> getById(@Valid ID id);
 
+    Optional<Response> getActiveById(@Valid ID id);
+
     List<Response> getAll();
+
+    List<Response> getAllActive();
 }
 
 

@@ -11,7 +11,11 @@ public interface BaseService<Entity, ID> {
 
     List<Entity> findAll();
 
+    List<Entity> findAllActive();
+
     Optional<Entity> findById(ID id);
+
+    Optional<Entity> findActiveById(ID id);
 
     void deleteById(ID id);
 
