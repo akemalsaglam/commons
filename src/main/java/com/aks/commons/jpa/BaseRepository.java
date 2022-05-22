@@ -1,14 +1,14 @@
 package com.aks.commons.jpa;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.lang.NonNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface BaseRepository<T, I> extends CrudRepository<T, I> {
+@NoRepositoryBean
+public interface BaseRepository<Entity extends BaseEntity, ID> extends JpaRepository<Entity, ID> {
 
-    Optional<T> findById(@NonNull I id);
+    List<Entity> findByStatusIs(String status);
 
-    List<T> findByName(@NonNull String name);
+    Entity findByIdIsAndStatusIs(ID id, String status);
 }
