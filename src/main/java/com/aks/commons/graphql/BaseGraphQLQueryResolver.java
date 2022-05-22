@@ -34,7 +34,7 @@ public class BaseGraphQLQueryResolver<Entity extends BaseEntity, Request extends
 
     @Override
     public List<Response> getAllActive() {
-        return mapper.mapEntityListToResponseList(service.findAll());
+        return mapper.mapEntityListToResponseList(service.findAllActive());
     }
 
     @Override
