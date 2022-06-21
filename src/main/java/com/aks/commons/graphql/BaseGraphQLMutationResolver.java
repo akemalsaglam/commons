@@ -12,7 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request extends BaseRequest, Response extends BaseResponse, ID>
-        implements GraphQLMutationResolver<Request, Response, ID> {
+        implements GraphQLMutationResolver<Request, Response, Entity, ID> {
 
     private final BaseService<Entity, ID> service;
     private final BaseMapper<Entity, Request, Response> mapper;
@@ -33,6 +33,14 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     }
 
     @Override
+    public Entity insertAndReturnEntity(Request request) {
+        Entity entity = mapper.mapRequestToEntity(request);
+        AuditingUtil.setCreateAuditInfo(entity);
+        entity.setStatus(Status.ACTIVE.value);
+        return service.save(entity);
+    }
+
+    @Override
     public Optional<Response> update(Request request) {
         final Optional<Entity> optionalEntity = service.findById((ID) request.getId());
         if (optionalEntity.isEmpty()) {
@@ -43,6 +51,18 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
         AuditingUtil.preserveCreateAuditInfo(optionalEntity.get(), entity);
         final Entity updatedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
+    }
+
+    @Override
+    public Entity updateAndReturnEntity(Request request) {
+        final Optional<Entity> optionalEntity = service.findById((ID) request.getId());
+        if (optionalEntity.isEmpty()) {
+            throw new EntityNotFoundException("Item not found by given id.");
+        }
+        Entity entity = mapper.mapRequestToEntity(request);
+        AuditingUtil.setUpdateAuditInfo(entity);
+        AuditingUtil.preserveCreateAuditInfo(optionalEntity.get(), entity);
+        return service.save(entity);
     }
 
     @Override
