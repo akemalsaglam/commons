@@ -46,7 +46,7 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
         if (optionalEntity.isEmpty()) {
             throw new EntityNotFoundException("Item not found by given id.");
         }
-        Entity entity = mapper.mapRequestToEntity(request);
+        Entity entity = mapper.mapRequestToEntity(request, optionalEntity.get());
         AuditingUtil.setUpdateAuditInfo(entity);
         AuditingUtil.preserveCreateAuditInfo(optionalEntity.get(), entity);
         final Entity updatedEntity = service.save(entity);
