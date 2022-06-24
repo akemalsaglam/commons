@@ -1,12 +1,15 @@
 package com.aks.commons.jpa.auditing;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import java.time.ZonedDateTime;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @MappedSuperclass
 public class AuditingEntity {
 

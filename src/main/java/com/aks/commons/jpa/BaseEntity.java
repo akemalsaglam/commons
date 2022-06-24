@@ -1,13 +1,14 @@
 package com.aks.commons.jpa;
 
 import com.aks.commons.jpa.auditing.AuditingEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.MappedSuperclass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @MappedSuperclass
 public class BaseEntity extends AuditingEntity {
 

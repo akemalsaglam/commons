@@ -31,8 +31,4 @@ public class AuditingUtil {
         targetEntity.setCreatedByEmail(sourceEntity.getCreatedByEmail());
     }
 
-    public static void preserveUpdateAuditInfo(BaseEntity sourceEntity, BaseEntity targetEntity) {
-        targetEntity.setUpdatedTime(sourceEntity.getUpdatedTime());
-        targetEntity.setUpdatedByEmail(sourceEntity.getUpdatedByEmail());
-    }
 }
