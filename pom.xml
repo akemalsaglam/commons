@@ -19,6 +19,7 @@
     <properties>
         <aws-java-sdk-s3.version>1.12.239</aws-java-sdk-s3.version>
         <aws-java-sdk-ses.version>1.12.239</aws-java-sdk-ses.version>
+        <io.jsonwebtoken.version>0.9.1</io.jsonwebtoken.version>
     </properties>
 
     <dependencies>
@@ -36,6 +37,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
             <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${io.jsonwebtoken.version}</version>
         </dependency>
     </dependencies>
 
