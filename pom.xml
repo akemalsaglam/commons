@@ -20,6 +20,7 @@
         <aws-java-sdk-s3.version>1.12.239</aws-java-sdk-s3.version>
         <aws-java-sdk-ses.version>1.12.239</aws-java-sdk-ses.version>
         <io.jsonwebtoken.version>0.9.1</io.jsonwebtoken.version>
+        <com.graphql-java-kickstart.version>12.0.0</com.graphql-java-kickstart.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,11 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${io.jsonwebtoken.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>graphql-java-servlet</artifactId>
+            <version>${com.graphql-java-kickstart.version}</version>
         </dependency>
     </dependencies>
 
