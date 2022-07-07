@@ -1,4 +1,4 @@
-package com.aks.commons.aws.mail;
+package com.aks.commons.aws.mail.template;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.TemplateLoader;
