@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.github.akemalsaglam</groupId>
         <artifactId>base-project</artifactId>
-        <version>03adcc1cf1</version>
+        <version>a43163a404</version>
         <relativePath/>
     </parent>
 
@@ -17,38 +17,9 @@
     <packaging>jar</packaging>
 
     <properties>
-        <aws-java-sdk-s3.version>1.12.239</aws-java-sdk-s3.version>
-        <aws-java-sdk-ses.version>1.12.239</aws-java-sdk-ses.version>
-        <io.jsonwebtoken.version>0.9.1</io.jsonwebtoken.version>
-        <com.graphql-java-kickstart.version>12.0.0</com.graphql-java-kickstart.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-ses</artifactId>
-            <version>${aws-java-sdk-ses.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <version>${aws-java-sdk-s3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${io.jsonwebtoken.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.graphql-java-kickstart</groupId>
-            <artifactId>graphql-java-servlet</artifactId>
-            <version>${com.graphql-java-kickstart.version}</version>
-        </dependency>
     </dependencies>
 
     <repositories>
