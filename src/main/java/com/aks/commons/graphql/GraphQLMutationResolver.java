@@ -14,11 +14,9 @@ public interface GraphQLMutationResolver<
         ID> {
 
     Optional<Response> update(@Valid Request requestModel);
-
-    Entity updateAndReturnEntity(@Valid Request requestModel);
-
     Optional<Response> insert(@Valid Request requestModel);
 
+    Entity updateAndReturnEntity(@Valid Request requestModel);
     Entity insertAndReturnEntity(@Valid Request requestModel);
 
     void deleteById(@Valid ID id);

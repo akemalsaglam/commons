@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BaseGraphQLQueryResolver<Entity extends BaseEntity, Request extends BaseRequest, Response extends BaseResponse, ID>
-        implements GraphQLQueryResolver<Response, ID> {
+        implements GraphQLQueryResolver<Response,Entity, ID> {
 
     private final BaseService<Entity, ID> service;
     private final BaseMapper<Entity, Request, Response> mapper;
@@ -41,6 +41,26 @@ public class BaseGraphQLQueryResolver<Entity extends BaseEntity, Request extends
     public Optional<Response> getActiveById(ID id) {
         final Optional<Entity> eventEntity = service.findActiveById(id);
         return eventEntity.map(mapper::mapEntityToResponse);
+    }
+
+    @Override
+    public Optional<Entity> getEntityById(ID id) {
+         return service.findById(id);
+    }
+
+    @Override
+    public Optional<Entity> getActiveEntityById(ID id) {
+        return service.findActiveById(id);
+    }
+
+    @Override
+    public List<Entity> getAllEntities() {
+        return service.findAll();
+    }
+
+    @Override
+    public List<Entity> getAllActiveEntities() {
+        return service.findAllActive();
     }
 }
 
