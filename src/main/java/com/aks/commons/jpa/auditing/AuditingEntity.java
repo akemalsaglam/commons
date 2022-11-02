@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -11,7 +12,7 @@ import java.time.ZonedDateTime;
 @ToString
 @RequiredArgsConstructor
 @MappedSuperclass
-public class AuditingEntity {
+public class AuditingEntity implements Serializable {
 
     @Email
     private String createdByEmail;
