@@ -5,26 +5,22 @@
     <parent>
         <groupId>com.github.akemalsaglam</groupId>
         <artifactId>base-project</artifactId>
-        <version>a43163a404</version>
-        <relativePath/>
+        <version>f298765154</version>
     </parent>
 
     <groupId>com.aks</groupId>
     <artifactId>commons</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>commons</name>
-    <description></description>
+
+    <description>Common project of good projects.</description>
+
     <packaging>jar</packaging>
 
     <properties>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.stripe</groupId>
-            <artifactId>stripe-java</artifactId>
-            <version>21.12.0</version>
-        </dependency>
     </dependencies>
 
     <repositories>
