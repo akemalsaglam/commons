@@ -1,6 +1,7 @@
 package com.aks.commons.jpa.auditing;
 
 
+import com.aks.commons.controller.BaseRequest;
 import com.aks.commons.jpa.BaseEntity;
 import com.aks.commons.security.SecurityContextUtil;
 import lombok.AccessLevel;
@@ -29,6 +30,21 @@ public class AuditingUtil {
     public static void preserveCreateAuditInfo(BaseEntity sourceEntity, BaseEntity targetEntity) {
         targetEntity.setCreatedTime(sourceEntity.getCreatedTime());
         targetEntity.setCreatedByEmail(sourceEntity.getCreatedByEmail());
+    }
+
+    public static void setCreateAuditInfo(BaseRequest baseRequest) {
+        baseRequest.setCreatedByEmail(SecurityContextUtil.getUserEmailFromContext());
+        baseRequest.setCreatedTime(ZonedDateTime.now());
+    }
+
+    public static void setUpdateAuditInfo(BaseRequest baseRequest) {
+        baseRequest.setUpdatedByEmail(SecurityContextUtil.getUserEmailFromContext());
+        baseRequest.setUpdatedTime(ZonedDateTime.now());
+    }
+
+    public static void setDeleteAuditInfo(BaseRequest baseRequest) {
+        baseRequest.setDeletedByEmail(SecurityContextUtil.getUserEmailFromContext());
+        baseRequest.setDeletedTime(ZonedDateTime.now());
     }
 
 }
