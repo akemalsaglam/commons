@@ -3,7 +3,8 @@ package com.aks.commons.jpa;
 public enum Status {
 
     ACTIVE("ACTIVE"),
-    PASSIVE("PASSIVE");
+    PASSIVE("PASSIVE"),
+    BLOCK("BLOCK");
 
     public final String value;
 
