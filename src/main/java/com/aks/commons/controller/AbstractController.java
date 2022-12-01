@@ -2,7 +2,6 @@ package com.aks.commons.controller;
 
 import com.aks.commons.jpa.BaseEntity;
 import com.aks.commons.jpa.Status;
-import com.aks.commons.jpa.auditing.AuditingUtil;
 import com.aks.commons.mapper.BaseMapper;
 import com.aks.commons.service.BaseService;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,6 @@ public class AbstractController<Entity extends BaseEntity, Request extends BaseR
     @Override
     public Optional<Response> update(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
-        AuditingUtil.setUpdateAuditInfo(entity);
         final Entity updatedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
     }
@@ -50,7 +48,6 @@ public class AbstractController<Entity extends BaseEntity, Request extends BaseR
     @Override
     public Optional<Response> insert(Request eventRequest) {
         Entity eventEntity = mapper.mapRequestToEntity(eventRequest);
-        AuditingUtil.setUpdateAuditInfo(eventEntity);
         final Entity insertedEntity = service.save(eventEntity);
         return Optional.ofNullable(mapper.mapEntityToResponse(insertedEntity));
     }
@@ -65,7 +62,6 @@ public class AbstractController<Entity extends BaseEntity, Request extends BaseR
         final Optional<Entity> entity = service.findById(id);
         if (entity.isPresent()) {
             entity.get().setStatus(Status.PASSIVE.toString());
-            AuditingUtil.setDeleteAuditInfo(entity.get());
             service.save(entity.get());
         }
     }

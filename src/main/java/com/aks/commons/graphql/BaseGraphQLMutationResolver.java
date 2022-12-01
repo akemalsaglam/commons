@@ -4,7 +4,6 @@ import com.aks.commons.controller.BaseRequest;
 import com.aks.commons.controller.BaseResponse;
 import com.aks.commons.jpa.BaseEntity;
 import com.aks.commons.jpa.Status;
-import com.aks.commons.jpa.auditing.AuditingUtil;
 import com.aks.commons.mapper.BaseMapper;
 import com.aks.commons.service.BaseService;
 
@@ -27,7 +26,6 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     public Optional<Response> insert(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
         entity.setStatus(Status.ACTIVE.value);
-        AuditingUtil.setCreateAuditInfo(entity);
         final Entity insertedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(insertedEntity));
     }
@@ -35,7 +33,6 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
     @Override
     public Entity insertAndReturnEntity(Request request) {
         Entity entity = mapper.mapRequestToEntity(request);
-        AuditingUtil.setCreateAuditInfo(entity);
         entity.setStatus(Status.ACTIVE.value);
         return service.save(entity);
     }
@@ -47,7 +44,6 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
             throw new EntityNotFoundException("Item not found by given id.");
         }
         Entity entity = mapper.mapRequestToEntity(request, optionalEntity.get());
-        AuditingUtil.setUpdateAuditInfo(entity);
         final Entity updatedEntity = service.save(entity);
         return Optional.ofNullable(mapper.mapEntityToResponse(updatedEntity));
     }
@@ -59,7 +55,6 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
             throw new EntityNotFoundException("Item not found by given id.");
         }
         Entity entity = mapper.mapRequestToEntity(request);
-        AuditingUtil.setUpdateAuditInfo(entity);
         return service.save(entity);
     }
 
@@ -70,7 +65,6 @@ public class BaseGraphQLMutationResolver<Entity extends BaseEntity, Request exte
             throw new EntityNotFoundException("Item not found by given id.");
         }
         entity.get().setStatus(Status.PASSIVE.value);
-        AuditingUtil.setDeleteAuditInfo(entity.get());
         service.save(entity.get());
     }
 
