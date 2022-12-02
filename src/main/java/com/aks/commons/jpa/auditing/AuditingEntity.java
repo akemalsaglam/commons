@@ -23,7 +23,7 @@ import java.io.Serializable;
 @MappedSuperclass
 public class AuditingEntity implements Serializable {
 
-    @Column(name = "created_date", nullable = false, updatable = false)
+    @Column(name = "created_date", updatable = false)
     @CreatedDate
     private long createdDate;
 
