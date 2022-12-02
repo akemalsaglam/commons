@@ -25,11 +25,11 @@ public class AuditingEntity implements Serializable {
 
     @Column(name = "created_date", updatable = false)
     @CreatedDate
-    private long createdDate;
+    private Long createdDate;
 
     @Column(name = "modified_date")
     @LastModifiedDate
-    private long modifiedDate;
+    private Long modifiedDate;
 
     @Column(name = "created_by")
     @CreatedBy
