@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,11 +26,11 @@ public class AuditingEntity implements Serializable {
 
     @Column(name = "created_date", updatable = false)
     @CreatedDate
-    private Long createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "modified_date")
     @LastModifiedDate
-    private Long modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Column(name = "created_by")
     @CreatedBy
