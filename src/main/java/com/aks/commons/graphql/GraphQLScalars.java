@@ -40,6 +40,11 @@ public class GraphQLScalars {
     }
 
     @Bean
+    public GraphQLScalarType localTime() {
+        return ExtendedScalars.LocalTime;
+    }
+
+    @Bean
     public GraphQLScalarType time() {
         return ExtendedScalars.Time;
     }
