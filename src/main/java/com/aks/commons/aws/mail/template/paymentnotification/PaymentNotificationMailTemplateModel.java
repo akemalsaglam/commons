@@ -7,7 +7,6 @@ import lombok.Builder;
 public class PaymentNotificationMailTemplateModel extends BaseMailTemplateModel {
 
     private String invitationUrl;
-    private String invitationLink;
     private String host1Name;
     private String host2Name;
 }
