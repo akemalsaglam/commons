@@ -29,6 +29,8 @@ public class StripePaymentService {
         params.put("amount", convertAmountToCents(amount));
         params.put("currency", currencyCode);
         params.put("payment_method_types", paymentMethodTypes);
+        params.put("receipt_email", userEmail);
+        params.put("customer", userEmail);
 
         Map<String, String> meta = new HashMap<>();
         meta.put("user_email", userEmail);
