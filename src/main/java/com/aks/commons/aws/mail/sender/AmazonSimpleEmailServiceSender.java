@@ -29,7 +29,7 @@ public class AmazonSimpleEmailServiceSender implements MailSender {
     private SendEmailRequest createSendEmailRequest(MailProperties mailProperties) {
         return new SendEmailRequest()
                 .withSource(mailProperties.getFromEmail())
-                .withDestination(new Destination().withToAddresses(mailProperties.getToEmail()))
+                .withDestination(new Destination().withToAddresses(mailProperties.getToEmail().split(",")))
                 .withMessage(
                         new Message()
                                 .withBody(getHtmlBody(mailProperties))

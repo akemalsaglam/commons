@@ -35,6 +35,7 @@ public class StripePaymentService {
         meta.put("user_email", userEmail);
         meta.put("order_id", UUID.randomUUID().toString());
         params.put("metadata", meta);
+
         final PaymentIntent intent = PaymentIntent.create(params);
         return new IntentResponse.IntentResponseBuilder()
                 .clientSecret(intent.getClientSecret())
