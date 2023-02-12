@@ -21,7 +21,8 @@ public class StripePaymentService {
         Stripe.apiKey = secretKey;
     }
 
-    public IntentResponse createPaymentIntent(BigDecimal amount, String currencyCode, String userEmail)
+    public IntentResponse createPaymentIntent(BigDecimal amount, String currencyCode, String userEmail,
+                                              String promotionCode)
             throws StripeException {
         List<Object> paymentMethodTypes = new ArrayList<>();
         paymentMethodTypes.add("card");
@@ -34,6 +35,7 @@ public class StripePaymentService {
         Map<String, String> meta = new HashMap<>();
         meta.put("user_email", userEmail);
         meta.put("order_id", UUID.randomUUID().toString());
+        meta.put("promotion_code", promotionCode);
         params.put("metadata", meta);
 
         final PaymentIntent intent = PaymentIntent.create(params);
