@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordResetToken extends BaseToken {
-    public static final long TOKEN_VALIDITY_SECONDS = 2 * 60 * 60; //2 HOURS
+    public static final long TOKEN_VALIDITY_SECONDS = 24 * 60 * 60; //24 HOURS
 
     @Autowired
     public PasswordResetToken() {
