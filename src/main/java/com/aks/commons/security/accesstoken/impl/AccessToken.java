@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccessToken extends BaseToken {
 
-    public static final long TOKEN_VALIDITY_SECONDS = 15 * 24 * 60 * 60; //15 DAYs
+    public static final long TOKEN_VALIDITY_SECONDS = 30 * 24 * 60 * 60; //30 DAYs
 
     @Autowired
     public AccessToken() {
