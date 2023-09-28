@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class SMSProperties {
 
+    private final String subject;
     private final String message;
     private final String phoneNumber;
 }

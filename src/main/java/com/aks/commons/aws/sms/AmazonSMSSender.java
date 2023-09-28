@@ -1,5 +1,6 @@
 package com.aks.commons.aws.sms;
 
+import com.aks.commons.aws.sms.sender.SMSSender;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
 import com.amazonaws.services.sns.model.PublishRequest;
@@ -37,6 +38,7 @@ public class AmazonSMSSender implements SMSSender {
 
   private PublishRequest createPublishRequest(SMSProperties smsProperties) {
     return new PublishRequest()
+        .withSubject(smsProperties.getSubject())
         .withMessage(smsProperties.getMessage())
         .withPhoneNumber(smsProperties.getPhoneNumber())
         .withMessageAttributes(smsAttributes);
