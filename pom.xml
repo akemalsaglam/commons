@@ -18,9 +18,15 @@
     <packaging>jar</packaging>
 
     <properties>
+
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sns</artifactId>
+            <version>1.12.500</version>
+        </dependency>
     </dependencies>
 
     <repositories>
