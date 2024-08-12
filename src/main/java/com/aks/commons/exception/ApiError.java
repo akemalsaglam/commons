@@ -10,21 +10,24 @@ import org.springframework.http.HttpStatus;
 public class ApiError {
 
   private HttpStatus status;
+  private int errorCode;
   private String message;
   private List<String> errors;
 
-  public ApiError(HttpStatus status, String message, List<String> errors) {
+  public ApiError(HttpStatus status, int errorCode, String message, List<String> errors) {
     super();
     this.status = status;
     this.message = message;
     this.errors = errors;
+    this.errorCode = errorCode;
   }
 
-  public ApiError(HttpStatus status, String message, String error) {
+  public ApiError(HttpStatus status, int errorCode, String message, String error) {
     super();
     this.status = status;
     this.message = message;
     errors = Arrays.asList(error);
+    this.errorCode = errorCode;
   }
 }
 

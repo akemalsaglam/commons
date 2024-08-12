@@ -25,7 +25,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
   public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
     String error = ex.getMessage();
     ApiError apiError =
-        new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Exception occurred.", error);
+        new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, 500, "Exception occurred.", error);
     return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
   }
 
@@ -45,7 +45,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     ApiError apiError =
-        new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        new ApiError(HttpStatus.BAD_REQUEST, 400, ex.getLocalizedMessage(), errors);
     return handleExceptionInternal(
         ex, apiError, headers, apiError.getStatus(), request);
   }
@@ -58,7 +58,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     String error = ex.getParameterName() + " parameter is missing";
 
     ApiError apiError =
-        new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+        new ApiError(HttpStatus.BAD_REQUEST, 400, ex.getLocalizedMessage(), error);
     return new ResponseEntity<>(
         apiError, new HttpHeaders(), apiError.getStatus());
   }
@@ -73,7 +73,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     ApiError apiError =
-        new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        new ApiError(HttpStatus.BAD_REQUEST, 400, ex.getLocalizedMessage(), errors);
     return new ResponseEntity<>(
         apiError, new HttpHeaders(), apiError.getStatus());
   }
@@ -85,7 +85,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         ex.getName() + " should be of type " + ex.getRequiredType().getName();
 
     ApiError apiError =
-        new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+        new ApiError(HttpStatus.BAD_REQUEST, 400, ex.getLocalizedMessage(), error);
     return new ResponseEntity<>(
         apiError, new HttpHeaders(), apiError.getStatus());
   }
@@ -93,14 +93,14 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler({AlreadyExistException.class})
   public ResponseEntity<Object> handleAlreadyExistException(AlreadyExistException ex, WebRequest request) {
     String error = ex.getMessage();
-    ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+    ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, 400, ex.getLocalizedMessage(), error);
     return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
   }
 
   @ExceptionHandler({InternalServiceException.class})
   public ResponseEntity<Object> handleInternalServiceException(InternalServiceException ex, WebRequest request) {
     String error = ex.getMessage();
-    ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), error);
+    ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, 500, ex.getLocalizedMessage(), error);
     return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
   }
 

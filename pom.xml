@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.github.akemalsaglam</groupId>
     <artifactId>base-project</artifactId>
-    <version>d8d4be6a0c</version>
+    <version>5cf40be4c6</version>
   </parent>
 
   <groupId>com.aks</groupId>
